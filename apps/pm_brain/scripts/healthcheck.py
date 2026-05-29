@@ -1,0 +1,12 @@
+#!/usr/bin/env python3
+"""Simple health check: verifies the FastAPI /health endpoint responds."""
+import sys
+import urllib.request
+
+try:
+    with urllib.request.urlopen("http://localhost:8000/health", timeout=5) as resp:
+        if resp.status == 200:
+            sys.exit(0)
+        sys.exit(1)
+except Exception:
+    sys.exit(1)
